@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { TemplateResult } from 'lit';
 import { LitElement, html, css } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 
@@ -19,7 +20,7 @@ export class AppIndex extends LitElement {
   @query('main')
   private main!: HTMLElement;
 
-  static styles = css`
+  public static styles = css`
     :host {
       display: flex;
       flex-direction: column;
@@ -73,7 +74,7 @@ export class AppIndex extends LitElement {
     }
   `;
 
-  render() {
+  protected override render(): TemplateResult {
     return html`
       <header>
         <nav>
@@ -99,7 +100,7 @@ export class AppIndex extends LitElement {
     `;
   }
 
-  firstUpdated() {
+  protected override firstUpdated(): void {
     attachRouter(this.main);
   }
 }
