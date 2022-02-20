@@ -4,6 +4,7 @@ import { customElement, query } from 'lit/decorators.js';
 
 import config from '../config.js';
 import { attachRouter, urlForName } from '../router/index.js';
+import styleSheet from '../stylesheets/stylesheets.js';
 
 import 'pwa-helper-components/pwa-install-button.js';
 import 'pwa-helper-components/pwa-update-available.js';
@@ -13,59 +14,62 @@ export class AppIndex extends LitElement {
   @query('main')
   private main!: HTMLElement;
 
-  public static styles = css`
-    :host {
-      display: flex;
-      flex-direction: column;
-    }
+  public static styles = [
+    ...styleSheet,
+    css`
+      :host {
+        display: flex;
+        flex-direction: column;
+      }
 
-    header {
-      display: flex;
-      align-items: center;
-      height: 53px;
-      padding: 0 1rem;
-      background-color: #24292e;
-    }
+      header {
+        display: flex;
+        align-items: center;
+        height: 53px;
+        padding: 0 1rem;
+        background-color: #24292e;
+      }
 
-    header nav {
-      display: flex;
-      flex: 1;
-      align-self: stretch;
-    }
+      header nav {
+        display: flex;
+        flex: 1;
+        align-self: stretch;
+      }
 
-    header nav a {
-      display: flex;
-      align-items: center;
-      color: #fff;
-      font-weight: 600;
-      text-decoration: none;
-    }
+      header nav a {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+      }
 
-    header nav a:not(:last-child) {
-      margin-right: 1rem;
-    }
+      header nav a:not(:last-child) {
+        margin-right: 1rem;
+      }
 
-    header nav a:hover {
-      color: #bbb;
-    }
+      header nav a:hover {
+        color: #bbb;
+      }
 
-    main,
-    main > * {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-    }
+      main,
+      main > * {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+      }
 
-    footer {
-      padding: 1rem;
-      background-color: #eee;
-      text-align: center;
-    }
+      footer {
+        padding: 1rem;
+        background-color: #eee;
+        text-align: center;
+      }
 
-    main:empty ~ footer {
-      display: none;
-    }
-  `;
+      main:empty ~ footer {
+        display: none;
+      }
+    `,
+  ];
 
   protected override render(): TemplateResult {
     return html`

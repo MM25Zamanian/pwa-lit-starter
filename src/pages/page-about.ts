@@ -3,14 +3,18 @@ import { html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import { PageElement } from '../helpers/page-element.js';
+import styleSheet from '../stylesheets/stylesheets.js';
 
 @customElement('page-about')
 export class PageAbout extends PageElement {
-  public static styles = css`
-    section {
-      padding: 1rem;
-    }
-  `;
+  public static styles = [
+    ...styleSheet,
+    css`
+      section {
+        padding: 1rem;
+      }
+    `,
+  ];
 
   protected override render(): TemplateResult {
     return html`
