@@ -71,7 +71,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install --frozen-lockfile
-          yarn format
+          yarn build
       - name: Git Push Changes
         run: |
           git status
