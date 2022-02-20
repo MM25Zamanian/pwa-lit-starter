@@ -7,19 +7,23 @@ import {
   pageNotFoundMeta,
 } from '../helpers/page-element-not-found.js';
 import { urlForName } from '../router/index.js';
+import styleSheet from '../stylesheets/stylesheets.js';
 
 @customElement('page-not-found')
 export class PageNotFound extends PageElementNotFound {
-  public static styles = css`
-    :host {
-      display: block;
-    }
+  public static styles = [
+    styleSheet,
+    css`
+      :host {
+        display: block;
+      }
 
-    section {
-      padding: 1rem;
-      text-align: center;
-    }
-  `;
+      section {
+        padding: 1rem;
+        text-align: center;
+      }
+    `,
+  ];
 
   protected override render(): TemplateResult {
     return html`
