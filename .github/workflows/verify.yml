@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - main
-      - 'renovate/**'
+      - develop
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'release/**'
+      - 'hotfix/**'
+      - 'support/**'
   pull_request:
 
 env:
@@ -22,10 +27,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci
-      - run: npm run lint
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
 
   type-checking:
     name: Type checking
@@ -38,12 +43,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci
-      - run: npm run types:check
+      - run: yarn install --frozen-lockfile
+      - run: yarn types:check
 
   build:
+    needs: lint
+
     name: Build
 
     runs-on: ubuntu-latest
@@ -53,8 +60,9 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci
-      - run: npm run build
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
