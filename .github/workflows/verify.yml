@@ -30,19 +30,12 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
 
-      - name: Git Config
       - run: git config --local user.email "mm25zamanian@gmail.com"
       - run: git config --local user.name "code-formatter"
-
-      - name: Install dependencies
       - run: yarn install --frozen-lockfile
       - run: yarn format
-
-      - name: Git Commit Files
       - run: git add --all
       - run: git commit -m ""
-
-      - name: Git Push Changes
       - run: git push
 
   lint:
