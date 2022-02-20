@@ -1,28 +1,7 @@
-/**
- * Copyright (c) IBM, Corp. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
+import MetaOptions from '../../types/meta-options.js';
 import { setMetaTag, setLinkTag } from './utils.js';
 
-interface ImageMetaOptions {
-  url: string;
-  alt?: string;
-  width?: string;
-  height?: string;
-}
-
-export interface MetaOptions {
-  title?: string;
-  titleTemplate?: string | null;
-  description?: string | null;
-  image?: ImageMetaOptions | null;
-  url?: string;
-}
-
-export const updateMeta = (options: MetaOptions) => {
+export const updateMeta = (options: MetaOptions): void => {
   const { title, titleTemplate, description, image, url } = options;
 
   if (title) {

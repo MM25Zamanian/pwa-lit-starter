@@ -3,6 +3,8 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "runem.lit-plugin",
-    "stylelint.vscode-stylelint"
+    "stylelint.vscode-stylelint",
+    "bierner.lit-html",
+    "lit.lit-snippets"
   ]
 }

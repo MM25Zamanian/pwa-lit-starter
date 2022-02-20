@@ -1,10 +1,10 @@
 {
-  "name": "pwa-lit-template",
+  "name": "pwa-lit-starter",
   "version": "0.1.0",
   "private": true,
   "description": "A template for building Progressive Web Applications using Lit and Vaadin Router",
   "license": "MIT",
-  "repository": "github:IBM/pwa-lit-template",
+  "repository": "https://github.com/MM25Zamanian/pwa-lit-starter",
   "scripts": {
     "build": "rimraf server/dist/ && rollup --config",
     "format": "npm-run-all format:*",
@@ -66,7 +66,32 @@
         "files": "src/**/*",
         "extends": "ibmresearch/typescript-lit",
         "rules": {
-          "@typescript-eslint/no-non-null-assertion": "off"
+          "@typescript-eslint/no-non-null-assertion": "off",
+          "@typescript-eslint/no-explicit-any": "warn",
+          "@typescript-eslint/explicit-function-return-type": "error",
+          "@typescript-eslint/method-signature-style": "error",
+          "@typescript-eslint/explicit-member-accessibility": [
+            "error",
+            {
+              "accessibility": "explicit"
+            }
+          ],
+          "@typescript-eslint/member-ordering": [
+            "error",
+            {
+              "default": [
+                "signature",
+                "field",
+                "constructor",
+                "get",
+                "set",
+                "protected-method",
+                "private-method",
+                "public-method",
+                "method"
+              ]
+            }
+          ]
         }
       }
     ]

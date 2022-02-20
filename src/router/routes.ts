@@ -1,18 +1,11 @@
-/**
- * Copyright (c) IBM, Corp. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import type { Route } from '@vaadin/router';
+import Route from '../types/route.js';
 
 export const routes: Route[] = [
   {
     path: '/',
     name: 'home',
     component: 'page-home',
-    action: async () => {
+    action: async (): Promise<void> => {
       await import('../pages/page-home.js');
     },
   },
@@ -20,7 +13,7 @@ export const routes: Route[] = [
     path: '/about',
     name: 'about',
     component: 'page-about',
-    action: async () => {
+    action: async (): Promise<void> => {
       await import('../pages/page-about.js');
     },
   },
@@ -28,7 +21,7 @@ export const routes: Route[] = [
     path: '(.*)',
     name: 'not-found',
     component: 'page-not-found',
-    action: async () => {
+    action: async (): Promise<void> => {
       await import('../pages/page-not-found.js');
     },
   },

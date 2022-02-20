@@ -1,18 +1,11 @@
-/**
- * Copyright (c) IBM, Corp. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import type { RouterLocation } from '@vaadin/router';
 import { LitElement } from 'lit';
 import type { PropertyValues } from 'lit';
 import { state } from 'lit/decorators.js';
 
 import config from '../config.js';
+import MetaOptions from '../types/meta-options.js';
 import { updateMeta } from './html-meta-manager/index.js';
-import type { MetaOptions } from './html-meta-manager/index.js';
 
 export class PageElement extends LitElement {
   @state()
@@ -20,7 +13,7 @@ export class PageElement extends LitElement {
 
   private defaultTitleTemplate = `%s | ${config.appName}`;
 
-  protected get defaultMeta() {
+  protected get defaultMeta(): { url: string; titleTemplate: string } {
     return {
       url: window.location.href,
       titleTemplate: this.defaultTitleTemplate,
@@ -34,7 +27,7 @@ export class PageElement extends LitElement {
     return;
   }
 
-  updated(changedProperties: PropertyValues<this>) {
+  protected updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
 
     const meta = this.meta();
