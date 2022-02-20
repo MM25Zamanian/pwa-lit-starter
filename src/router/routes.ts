@@ -1,4 +1,4 @@
-import type { Route } from '@vaadin/router';
+import Route from '../types/route.js';
 
 export const routes: Route[] = [
   {
