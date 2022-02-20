@@ -20,7 +20,7 @@ export class PageElement extends LitElement {
 
   private defaultTitleTemplate = `%s | ${config.appName}`;
 
-  protected get defaultMeta() {
+  protected get defaultMeta(): { url: string; titleTemplate: string } {
     return {
       url: window.location.href,
       titleTemplate: this.defaultTitleTemplate,
@@ -34,7 +34,7 @@ export class PageElement extends LitElement {
     return;
   }
 
-  updated(changedProperties: PropertyValues<this>) {
+  protected updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
 
     const meta = this.meta();

@@ -22,7 +22,7 @@ export interface MetaOptions {
   url?: string;
 }
 
-export const updateMeta = (options: MetaOptions) => {
+export const updateMeta = (options: MetaOptions): void => {
   const { title, titleTemplate, description, image, url } = options;
 
   if (title) {

@@ -16,7 +16,7 @@ export const pageNotFoundMeta = {
 };
 
 export class PageElementNotFound extends PageElement {
-  connectedCallback() {
+  public connectedCallback(): void {
     super.connectedCallback();
 
     setMetaTag('name', 'render:status_code', '404');
@@ -27,7 +27,7 @@ export class PageElementNotFound extends PageElement {
     });
   }
 
-  disconnectedCallback() {
+  public disconnectedCallback(): void {
     removeMetaTag('name', 'render:status_code');
 
     super.disconnectedCallback();

@@ -12,7 +12,7 @@ export const routes: Route[] = [
     path: '/',
     name: 'home',
     component: 'page-home',
-    action: async () => {
+    action: async (): Promise<void> => {
       await import('../pages/page-home.js');
     },
   },
@@ -20,7 +20,7 @@ export const routes: Route[] = [
     path: '/about',
     name: 'about',
     component: 'page-about',
-    action: async () => {
+    action: async (): Promise<void> => {
       await import('../pages/page-about.js');
     },
   },
@@ -28,7 +28,7 @@ export const routes: Route[] = [
     path: '(.*)',
     name: 'not-found',
     component: 'page-not-found',
-    action: async () => {
+    action: async (): Promise<void> => {
       await import('../pages/page-not-found.js');
     },
   },
