@@ -34,9 +34,10 @@ jobs:
       - run: git config --local user.name "code-formatter"
       - run: yarn install --frozen-lockfile
       - run: yarn format
-      - run: git add --all
-      - run: git commit -m "style(formatter)"
-      - run: git push
+      - run: git status
+      # - run: git add --all
+      # - run: git commit -m "style(formatter)"
+      # - run: git push
 
   lint:
     needs: format
