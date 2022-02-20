@@ -4,8 +4,8 @@ import type { PropertyValues } from 'lit';
 import { state } from 'lit/decorators.js';
 
 import config from '../config.js';
+import MetaOptions from '../types/meta-options.js';
 import { updateMeta } from './html-meta-manager/index.js';
-import type { MetaOptions } from './html-meta-manager/index.js';
 
 export class PageElement extends LitElement {
   @state()

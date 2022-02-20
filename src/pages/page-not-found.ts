@@ -8,6 +8,7 @@ import {
 } from '../helpers/page-element-not-found.js';
 import { urlForName } from '../router/index.js';
 import styleSheet from '../stylesheets/stylesheets.js';
+import MetaOptions from '../types/meta-options.js';
 
 @customElement('page-not-found')
 export class PageNotFound extends PageElementNotFound {
@@ -37,11 +38,7 @@ export class PageNotFound extends PageElementNotFound {
     `;
   }
 
-  public meta(): {
-    title: string;
-    description: null;
-    image: null;
-  } {
+  public meta(): MetaOptions {
     return pageNotFoundMeta;
   }
 }

@@ -5,6 +5,7 @@ import { customElement } from 'lit/decorators.js';
 import config from '../config.js';
 import { PageElement } from '../helpers/page-element.js';
 import styleSheet from '../stylesheets/stylesheets.js';
+import MetaOptions from '../types/meta-options.js';
 
 @customElement('page-home')
 export class PageHome extends PageElement {
@@ -41,11 +42,7 @@ export class PageHome extends PageElement {
     `;
   }
 
-  public meta(): {
-    title: string;
-    titleTemplate: string | null;
-    description: string;
-  } {
+  public meta(): MetaOptions {
     return {
       title: config.appName,
       titleTemplate: null,
