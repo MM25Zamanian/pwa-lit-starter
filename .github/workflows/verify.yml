@@ -4,13 +4,34 @@ on:
   push:
     branches:
       - main
-      - 'renovate/**'
+      - develop
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'release/**'
+      - 'hotfix/**'
+      - 'support/**'
   pull_request:
 
 env:
   NODE_VERSION: '16.x'
 
 jobs:
+  format:
+    name: Formatter
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn format
+
   lint:
     name: Lint
 
@@ -22,10 +43,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci
-      - run: npm run lint
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
 
   type-checking:
     name: Type checking
@@ -38,10 +59,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci
-      - run: npm run types:check
+      - run: yarn install --frozen-lockfile
+      - run: yarn types:check
 
   build:
     name: Build
@@ -54,7 +75,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci
-      - run: npm run build
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
