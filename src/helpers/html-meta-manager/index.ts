@@ -1,19 +1,5 @@
+import MetaOptions from '../../types/meta-options.js';
 import { setMetaTag, setLinkTag } from './utils.js';
-
-interface ImageMetaOptions {
-  url: string;
-  alt?: string;
-  width?: string;
-  height?: string;
-}
-
-export interface MetaOptions {
-  title?: string;
-  titleTemplate?: string | null;
-  description?: string | null;
-  image?: ImageMetaOptions | null;
-  url?: string;
-}
 
 export const updateMeta = (options: MetaOptions): void => {
   const { title, titleTemplate, description, image, url } = options;

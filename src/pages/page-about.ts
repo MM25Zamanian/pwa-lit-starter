@@ -3,6 +3,7 @@ import { html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import { PageElement } from '../helpers/page-element.js';
+import MetaOptions from '../types/meta-options.js';
 
 @customElement('page-about')
 export class PageAbout extends PageElement {
@@ -27,7 +28,7 @@ export class PageAbout extends PageElement {
     `;
   }
 
-  public override meta(): { title: string; description: string } {
+  public override meta(): MetaOptions {
     return {
       title: 'About',
       description: 'About page description',
