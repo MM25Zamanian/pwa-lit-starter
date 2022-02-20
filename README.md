@@ -2,10 +2,9 @@
 >
 > This project is currently in development.
 
-[![CI](https://github.com/IBM/pwa-lit-template/workflows/CI/badge.svg)](https://github.com/IBM/pwa-lit-template/actions)
-[![Built with pwa-lit-template](https://img.shields.io/badge/built%20with-pwa--lit--template-blue)](https://github.com/IBM/pwa-lit-template 'Built with pwa-lit-template')
+[![Built with pwa-lit-starter](https://img.shields.io/badge/built%20with-pwa--lit--starter-blue)](https://github.com/MM25Zamanian/pwa-lit-starter/ 'Built with pwa-lit-starter')
 
-# pwa-lit-template
+# pwa-lit-starter
 
 > [Getting started](#getting-started) | [Build for production](#build-for-production) | [Create a new page](#create-a-new-page) | [Environment configuration](#environment-configuration) | [Service worker](#service-worker) | [Browser support](#browser-support)
 
@@ -26,24 +25,24 @@ Check out [our roadmap](https://github.com/IBM/pwa-lit-template/projects/1) to g
 ### Prerequisites
 
 - [node.js](https://nodejs.org)
+- [yarn](https://yarnpkg.com)
 
 Furthermore, this project is built on [TypeScript](https://www.typescriptlang.org) with the intention of improving the developer experience.
 
 ### Install the dependencies
 
-    npm install
+    yarn
 
 ### Start the development server
 
 This command serves the app at `http://localhost:8000`:
 
-    npm start
+    yarn serve
 
 ### Project structure
 
 ```
 ├─ images/
-├─ patches/
 ├─ server/
 ├─ src/
 │  ├─ components/
@@ -57,6 +56,13 @@ This command serves the app at `http://localhost:8000`:
 │  │  └─ ···
 │  ├─ router/
 │  │  └─ routes.ts
+│  ├─ stylesheets/
+│  │  ├─ stylesheet.ts
+│  │  ├─ reset.stylesheet.ts
+│  │  └─ ···
+│  ├─ types/
+│  │  └─ route.ts
+│  │  └─ ···
 │  └─ config.ts
 ├─ index.html
 ├─ manifest.webmanifest
@@ -67,13 +73,14 @@ This command serves the app at `http://localhost:8000`:
 ```
 
 - `images`: is use to store the static resourced used by your application.
-- `patches`: contains the patches to apply in the different packages mentioned [here](#things-to-be-aware). It will be removed at some point.
 - `server`: contains the logic to serve the application. And is where you are going to create your `dist/` folder containing the bundle of your application.
 - `src`
   - `components`: contains your custom Web Components. Inside this folder you will find the `app-index.ts` file, main root of your application following the PRPL patern.
   - `helpers`: contains two interesting features: `PageElement` and `html-meta-manager`. Go more in-depth with them [here](#create-a-new-page).
   - `pages`: where you create the pages for your application.
   - `router`: where you create the routes for your application.
+  - `stylesheets`: where you create the stylesheets for your application.
+  - `types`: where you create the types for your application.
   - `config.ts`: stores the application configuration variables. Go more in-depth with it [here](#environment-configuration).
 - `index.html`: the application entry point.
 
@@ -83,7 +90,7 @@ This command serves the app at `http://localhost:8000`:
 
 This command use Rollup to build an optimized version of the application for production:
 
-    npm run build
+    yarn build
 
 It has two outputs: in addition to outputting a regular build, it outputs a legacy build which is compatible with older browsers down to IE11.
 
@@ -96,27 +103,47 @@ Note: If you need to add static files to the build, like the `images` folder or 
 1. Create the new page component (extending from `PageElement` helper) in the `pages` folder. For example a `page-explore.ts`.
 
    ```typescript
-   import { html } from 'lit';
-   import { customElement } from 'lit/decorators.js';
+    import type { TemplateResult } from 'lit';
+    import { html, css } from 'lit';
+    import { customElement } from 'lit/decorators.js';
 
-   import { PageElement } from '../helpers/page-element.js';
+    import { PageElement } from '../helpers/page-element.js';
+    import styleSheet from '../stylesheets/stylesheets.js';
+    import MetaOptions from '../types/meta-options.js';
 
-   @customElement('page-explore')
-   export class PageExplore extends PageElement {
-     render() {
-       return html`
-         <h1>Explore</h1>
-         <p>My new explore page!</p>
-       `;
-     }
+    @customElement('page-explore')
+    export class PageExplore extends PageElement {
+      public static styles = [
+        ...styleSheet,
+        css`
+          section {
+            padding: 1rem;
+          }
+        `,
+      ];
 
-     meta() {
-       return {
-         title: 'Explore',
-         description: 'Explore page description',
-       };
-     }
-   }
+      protected override render(): TemplateResult {
+        return html`
+          <section>
+            <h1>About</h1>
+
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi,
+              delectus? Unde, sit. Fuga modi ea praesentium. Nemo dicta qui, magnam
+              cum dolorum excepturi beatae explicabo quidem fugiat ullam blanditiis
+              minima!
+            </p>
+          </section>
+        `;
+      }
+
+      public override meta(): MetaOptions {
+        return {
+          title: 'About',
+          description: 'About page description',
+        };
+      }
+    }
    ```
 
 2. Register the new route in the `routes.ts`:
@@ -158,7 +185,7 @@ import config from '../config.js';
 And use it where you need it:
 
 ```typescript
-render() {
+protected override render(): TemplateResult {
   return html`
     <footer>
       <span>Environment: ${config.environment}</span>
