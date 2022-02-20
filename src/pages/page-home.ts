@@ -4,15 +4,19 @@ import { customElement } from 'lit/decorators.js';
 
 import config from '../config.js';
 import { PageElement } from '../helpers/page-element.js';
+import styleSheet from '../stylesheets/stylesheets.js';
 import MetaOptions from '../types/meta-options.js';
 
 @customElement('page-home')
 export class PageHome extends PageElement {
-  public static styles = css`
-    section {
-      padding: 1rem;
-    }
-  `;
+  public static styles = [
+    styleSheet,
+    css`
+      section {
+        padding: 1rem;
+      }
+    `,
+  ];
 
   protected override render(): TemplateResult {
     return html`
