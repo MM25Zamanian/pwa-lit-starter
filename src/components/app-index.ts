@@ -1,10 +1,3 @@
-/**
- * Copyright (c) IBM, Corp. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import type { TemplateResult } from 'lit';
 import { LitElement, html, css } from 'lit';
 import { customElement, query } from 'lit/decorators.js';

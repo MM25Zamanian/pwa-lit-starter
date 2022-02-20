@@ -1,10 +1,10 @@
 {
-  "name": "pwa-lit-template",
+  "name": "pwa-lit-starter",
   "version": "0.1.0",
   "private": true,
   "description": "A template for building Progressive Web Applications using Lit and Vaadin Router",
   "license": "MIT",
-  "repository": "github:IBM/pwa-lit-template",
+  "repository": "https://github.com/MM25Zamanian/pwa-lit-starter",
   "scripts": {
     "build": "rimraf server/dist/ && rollup --config",
     "format": "npm-run-all format:*",
