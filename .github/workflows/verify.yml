@@ -16,31 +16,7 @@ env:
   NODE_VERSION: '16.x'
 
 jobs:
-  format:
-    name: Formatter
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
-
-      - run: git config --local user.email "mm25zamanian@gmail.com"
-      - run: git config --local user.name "code-formatter"
-      - run: yarn install --frozen-lockfile
-      - run: yarn format
-      - run: git status
-      # - run: git add --all
-      # - run: git commit -m "style(formatter)"
-      # - run: git push
-
   lint:
-    needs: format
     name: Lint
 
     runs-on: ubuntu-latest
@@ -57,7 +33,6 @@ jobs:
       - run: yarn lint
 
   type-checking:
-    needs: lint
     name: Type checking
 
     runs-on: ubuntu-latest
@@ -72,3 +47,34 @@ jobs:
 
       - run: yarn install --frozen-lockfile
       - run: yarn types:check
+
+  build:
+    needs: lint
+
+    name: Build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: Git Config
+        run: |
+          git config --local user.email "mm25zamanian@gmail.com"
+          git config --local user.name "code-formatter"
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+          yarn format
+      - name: Git Push Changes
+        run: |
+          git status
+          git add --all
+          git commit -m "style(formatter)"
+          git push
