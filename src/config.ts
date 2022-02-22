@@ -1,5 +1,5 @@
 export default {
-  environment: 'development',
+  environment: <'development' | 'production'>'development',
   appName: 'MyApplication',
   appDescription: 'MyApplication description',
 };
