@@ -1,16 +1,17 @@
-import type { TemplateResult } from 'lit';
-import { LitElement, html, css } from 'lit';
+import type { PropertyValues, TemplateResult } from 'lit';
+import { html, css } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 
 import config from '../config.js';
 import { attachRouter, urlForName } from '../router/index.js';
 import styleSheet from '../stylesheets/stylesheets.js';
+import BaseElement from '../utils/base-element.js';
 
 import 'pwa-helper-components/pwa-install-button.js';
 import 'pwa-helper-components/pwa-update-available.js';
 
 @customElement('app-index')
-export class AppIndex extends LitElement {
+export class AppIndex extends BaseElement {
   @query('main')
   private main!: HTMLElement;
 
@@ -72,6 +73,8 @@ export class AppIndex extends LitElement {
   ];
 
   protected override render(): TemplateResult {
+    this._log('render');
+
     return html`
       <header>
         <nav>
@@ -97,7 +100,9 @@ export class AppIndex extends LitElement {
     `;
   }
 
-  protected override firstUpdated(): void {
+  protected override firstUpdated(_changedProperties: PropertyValues): void {
+    super.firstUpdated(_changedProperties);
+    this._log('firstUpdated');
     attachRouter(this.main);
   }
 }

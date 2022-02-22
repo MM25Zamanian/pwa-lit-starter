@@ -1,13 +1,13 @@
 import type { RouterLocation } from '@vaadin/router';
-import { LitElement } from 'lit';
 import type { PropertyValues } from 'lit';
 import { state } from 'lit/decorators.js';
 
 import config from '../config.js';
 import MetaOptions from '../types/meta-options.js';
+import BaseElement from '../utils/base-element.js';
 import { updateMeta } from './html-meta-manager/index.js';
 
-export class PageElement extends LitElement {
+export class PageElement extends BaseElement {
   @state()
   protected location?: RouterLocation;
 
