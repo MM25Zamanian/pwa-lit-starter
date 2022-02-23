@@ -24,3 +24,7 @@ export const attachRouter = (outlet: HTMLElement): void => {
 export const urlForName = (name: string, params?: Params): string => {
   return router.urlForName(name, params);
 };
+
+export const isActive = (path: string): boolean => {
+  return routes.filter((route) => route.path === path)[0]?.path === path;
+};
